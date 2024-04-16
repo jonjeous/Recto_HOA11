@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install Docker
+    apt:
+      name: docker.io
+      state: present
+      update_cache: yes
+
+  - name: Install Docker python library
+    pip:
+      name: docker
+      state: present
+
+  - name: Build Docker image
+    docker_image:
+      path: /home/jonjeous/Recto_HOA11/docker
+      name: apache-test
+      tag: latest
+
